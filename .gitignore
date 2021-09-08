@@ -1,0 +1,10 @@
+*.pyc
+
+__pycache__
+
+.idea
+
+venv
+
+env_vars/local.conf
+env_vars/prod.conf

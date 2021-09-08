@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
 
 from fast_api_project import Base
 
@@ -12,3 +13,4 @@ class User(Base):
 
     first_name = Column(String(100))
     last_name = Column(String(100))
+

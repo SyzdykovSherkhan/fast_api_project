@@ -6,7 +6,8 @@ from sqlalchemy import pool
 from alembic import context
 from fast_api_project import settings, Base
 from sqlalchemy.engine.url import URL
-from users.models import User
+from users import models
+from blog import models
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

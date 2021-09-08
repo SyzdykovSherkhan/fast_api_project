@@ -9,15 +9,25 @@ class UserBase(BaseModel):
     first_name: Optional[str] = None
     last_name: Optional[str] = None
 
+    class Config:
+        orm_mode = True
+
 
 class UserCreate(UserBase):
     email: EmailStr
     password: constr(min_length=8, max_length=50)
 
+    class Config:
+        orm_mode = True
+
 
 class UserInDB(schemas.IdModelMixin, schemas.CreatedModifiedMixin, UserBase):
-    password: constr(min_length=8, max_lenght=50)
+    password: constr(min_length=8, max_length=50)
+
+    class Config:
+        orm_mode = True
 
 
-class UserPublic(schemas.IdModelMixin, UserBase):
-    ...
+class UserPublic(UserBase):
+    class Config:
+        orm_mode = True

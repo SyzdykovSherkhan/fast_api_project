@@ -12,11 +12,14 @@ router = APIRouter()
 @router.post('/create', tags=['user registration'],
              description='Register the User', response_model=UserPublic)
 async def user_create(user: UserCreate):
-    hashed_password = auth_service.hash_password(user.password)
-    db_user = User(email=user.email, password=hashed_password)
+    hashed_password = auth_service.hash_password(password=user.password)
+
+    new_user_params = user.copy(update={'password': hashed_password})
+    new_user_updated = UserInDB(**new_user_params.dict())
+
+    db_user = User(**new_user_updated.dict())
     async with LocalAsyncSession() as session:
         async with session.begin():
-            await session.add(db_user)
-            await session.commit()
-            await session.refresh(db_user)
+            session.add(db_user)
+            await session.flush()
     return db_user

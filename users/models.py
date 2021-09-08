@@ -9,7 +9,7 @@ class User(Base):
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     email = Column(String(50), unique=True, nullable=False, index=True)
-    password = Column(String(50), nullable=False)
+    password = Column(String(100), nullable=False)
 
     is_active = Column(Boolean, nullable=False, server_default='True')
     is_superuser = Column(Boolean, nullable=False, server_default='False')

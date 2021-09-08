@@ -13,7 +13,7 @@ class UserBase(BaseModel):
         orm_mode = True
 
 
-class UserCreate(UserBase):
+class UserCreate(schemas.CreatedModifiedMixin, UserBase):
     email: EmailStr
     password: constr(min_length=8, max_length=50)
 
@@ -21,8 +21,8 @@ class UserCreate(UserBase):
         orm_mode = True
 
 
-class UserInDB(schemas.IdModelMixin, schemas.CreatedModifiedMixin, UserBase):
-    password: constr(min_length=8, max_length=50)
+class UserInDB(schemas.CreatedModifiedMixin, UserBase):
+    password: str
 
     class Config:
         orm_mode = True
